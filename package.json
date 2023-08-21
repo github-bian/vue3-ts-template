@@ -7,6 +7,7 @@
 		"build": "vue-tsc --noEmit && vite build",
 		"build-tailwind": "tailwind build ./src/index.css -o ./public/index.css",
 		"preview": "vite preview",
+        "preinstall": "npx only-allow pnpm",
         "lint:lint-staged": "lint-staged",
 		"eslint:comment": "使用 ESLint 检查并自动修复 src 目录下所有扩展名为 .js 和 .vue 的文件",
 		"eslint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
@@ -27,14 +28,26 @@
 		}
 	},
 	"lint-staged": {
-		"*.{js,ts,vue,jsx,tsx}": [
-			"npm run eslint",
-			"npm run prettier"
+		"*.{js,ts}": [
+		  "eslint --fix",
+		  "prettier --write"
 		],
-		"*.{html,css,less,scss,md}": [
-			"prettier --write"
+		"*.{cjs,json}": [
+		  "prettier --write"
+		],
+		"*.{vue,html}": [
+		  "eslint --fix",
+		  "prettier --write",
+		  "stylelint --fix"
+		],
+		"*.{scss,css}": [
+		  "stylelint --fix",
+		  "prettier --write"
+		],
+		"*.md": [
+		  "prettier --write"
 		]
-	},
+	  },
 	"dependencies": {
 		"@babel/node": "^7.22.10",
 		"@vueuse/core": "^8.2.0",
