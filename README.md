@@ -1,5 +1,7 @@
 # Vite + Vue3 + Typescript + Pinia + Vueuse
+
 # 环境依赖版本
+
 -   [node](https://github.com/nodejs/node)：v14.15.4
 -   [vite](https://github.com/vitejs/vite)：^2.8.0
 -   [vue](https://github.com/vuejs/vue)：^3.2.25
@@ -78,39 +80,44 @@ yarn create vite project-name --template vue-ts
 ```
 
 ## 集成配置
+
 1. 为保证 node 的使用
+
 ```bash
 pnpm i @types/node --save-dev
 ```
+
 2. 修改 `tsconfig.json`
+
 ```json
 {
-  "compilerOptions": {
-    "typeRoots": [
-      "node_modules/@types", // 默认值
-      "src/types"
-   ],
-    "target": "esnext",
-    "useDefineForClassFields": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "strict": true,
-    "jsx": "preserve",
-    "sourceMap": true,
-    "resolveJsonModule": true,
-    "esModuleInterop": true,
-    "lib": ["esnext", "dom"],
-    "baseUrl": "./",
-    "paths":{
-      "@": ["src"],
-      "@/*": ["src/*"],
-    }
-  },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
+    "compilerOptions": {
+        "typeRoots": [
+            "node_modules/@types", // 默认值
+            "src/types"
+        ],
+        "target": "esnext",
+        "useDefineForClassFields": true,
+        "module": "esnext",
+        "moduleResolution": "node",
+        "strict": true,
+        "jsx": "preserve",
+        "sourceMap": true,
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
+        "lib": ["esnext", "dom"],
+        "baseUrl": "./",
+        "paths": {
+            "@": ["src"],
+            "@/*": ["src/*"]
+        }
+    },
+    "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
 }
-
 ```
+
 3. 修改 `vite.config.ts`
+
 ```typescript
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
@@ -141,27 +148,32 @@ export default defineConfig({
         }
     }
 });
-
 ```
 
 # 2. 代码质量风格的统一
 
 ## 集成 `eslint`
+
 1. 安装
+
 ```bash
 pnpm i eslint eslint-plugin-vue --save-dev
 ```
+
 由于 ESLint 默认使用 [Espree](https://github.com/eslint/espree) 进行语法解析，无法识别 TypeScript 的一些语法，故我们需要安装 [`@typescript-eslint/parser`](https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/parser) 替代掉默认的解析器
+
 ```bash
 pnpm install @typescript-eslint/parser --save-dev
 ```
 
 安装对应的插件 [@typescript-eslint/eslint-plugin](https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin) 它作为 eslint 默认规则的补充，提供了一些额外的适用于 ts 语法的规则。
+
 ```bash
 pnpm install @typescript-eslint/eslint-plugin --save-dev
 ```
 
 2. 创建配置文件： `.eslintrc.js` 或 `.eslintrc.json`
+
 ```javascript
 module.exports = {
     parser: 'vue-eslint-parser',
@@ -175,24 +187,24 @@ module.exports = {
         }
     },
 
-    extends: [
-        'plugin:vue/vue3-recommended',
-        'plugin:@typescript-eslint/recommended',
-    ],
+    extends: ['plugin:vue/vue3-recommended', 'plugin:@typescript-eslint/recommended'],
 
     rules: {
         // override/add rules settings here, such as:
     }
 };
-
 ```
+
 3. 创建忽略文件：`.eslintignore`
+
 ```
 node_modules/
 dist/
 index.html
 ```
+
 4. 命令行式运行：修改 `package.json`
+
 ```json
 {
     ...
@@ -205,15 +217,17 @@ index.html
 }
 ```
 
-
 ## 集成 `prettier`
+
 1. 安装
+
 ```bash
 pnpm i prettier eslint-config-prettier eslint-plugin-prettier --save-dev
 ```
 
 2. 创建配置文件： `prettier.config.js` 或 `.prettierrc.js`
-``` javascript
+
+```javascript
 module.exports = {
     // 一行最多 80 字符
     printWidth: 80,
@@ -250,10 +264,11 @@ module.exports = {
     htmlWhitespaceSensitivity: 'css',
     // 换行符使用 lf
     endOfLine: 'auto'
-}
-
+};
 ```
+
 3. 修改 `.eslintrc.js` 配置
+
 ```javascript
 module.exports = {
     ...
@@ -268,7 +283,9 @@ module.exports = {
     ...
 };
 ```
+
 4. 命令行式运行：修改 `package.json`
+
 ```json
 {
     ...
@@ -282,6 +299,7 @@ module.exports = {
 ```
 
 # 3. 集成 `pinia`
+
 `Pinia` 读音：['piːnə]，是 Vue 官方团队推荐代替`Vuex`的一款轻量级状态管理库。
 
 **Pinia 有如下特点：**
@@ -303,49 +321,43 @@ module.exports = {
 
 1.  新建 src/store 目录并在其下面创建 index.ts，导出 store
 
-``` typescript
- import { createPinia } from 'pinia'
+```typescript
+import { createPinia } from 'pinia';
 
- const store = createPinia()
+const store = createPinia();
 
- export default store
+export default store;
 ```
 
 2.  在 main.ts 中引入并使用
 
 ```typescript
- import { createApp } from 'vue'
- import App from './App.vue'
- import store from './store'
- ​
- // 创建vue实例
- const app = createApp(App)
- ​
- // 挂载pinia
- app.use(store)
- ​
- // 挂载实例
- app.mount('#app');
+import { createApp } from 'vue';
+import App from './App.vue';
+import store from './store'; // 创建vue实例
+const app = createApp(App); // 挂载pinia
+app.use(store); // 挂载实例
+app.mount('#app');
 ```
 
 3.  **定义State：** 在 src/store 下面创建一个 user.ts
 
 ```typescript
- import { defineStore } from 'pinia'
+import { defineStore } from 'pinia';
 
- export const useUserStore = defineStore({
-   id: 'user', // id必填，且需要唯一
-   state: () => {
-     return {
-       name: '张三'
-     }
-   },
-   actions: {
-     updateName(name) {
-       this.name = name
-     }
-   }
- })
+export const useUserStore = defineStore({
+    id: 'user', // id必填，且需要唯一
+    state: () => {
+        return {
+            name: '张三'
+        };
+    },
+    actions: {
+        updateName(name) {
+            this.name = name;
+        }
+    }
+});
 ```
 
 4.  **获取State：** 在 src/components/usePinia.vue 中使用
@@ -377,7 +389,7 @@ module.exports = {
  </script>
 ```
 
-> 更详细上手指南：[链接](https://juejin.cn/post/7049196967770980389)   官方文档：[链接](https://pinia.vuejs.org/introduction.html)
+> 更详细上手指南：[链接](https://juejin.cn/post/7049196967770980389) 官方文档：[链接](https://pinia.vuejs.org/introduction.html)
 
 # 4. 集成 `vue-router4`
 
@@ -392,64 +404,63 @@ module.exports = {
 1.  新建 src/router 目录并在其下面创建 index.ts，导出 router
 
 ```typescript
- import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 
- const routes: Array<RouteRecordRaw> = [
-   {
-     path: '/login',
-     name: 'Login',
-     meta: {
-         title: '登录',
-         keepAlive: true,
-         requireAuth: false
-     },
-     component: () => import('@/pages/login.vue')
-   },
-   {
-       path: '/',
-       name: 'Index',
-       meta: {
-           title: '首页',
-           keepAlive: true,
-           requireAuth: true
-       },
-       component: () => import('@/pages/index.vue')
-   }
- ]
+const routes: Array<RouteRecordRaw> = [
+    {
+        path: '/login',
+        name: 'Login',
+        meta: {
+            title: '登录',
+            keepAlive: true,
+            requireAuth: false
+        },
+        component: () => import('@/views/login.vue')
+    },
+    {
+        path: '/',
+        name: 'Index',
+        meta: {
+            title: '首页',
+            keepAlive: true,
+            requireAuth: true
+        },
+        component: () => import('@/views/index.vue')
+    }
+];
 
- const router = createRouter({
-   history: createWebHistory(),
-   routes
- });
- export default router;
+const router = createRouter({
+    history: createWebHistory(),
+    routes
+});
+export default router;
 ```
 
 2.  在 main.ts 中引入并使用
 
 ```typescript
- import { createApp } from 'vue'
- import App from './App.vue'
- import store from './store'
- import router from '@/router';
+import { createApp } from 'vue';
+import App from './App.vue';
+import store from './store';
+import router from '@/router'; // 创建vue实例
 
- // 创建vue实例
- const app = createApp(App);
+const app = createApp(App);
 
- app.use(router);
+app.use(router); // 挂载实例
 
- // 挂载实例
- app.mount('#app');
+app.mount('#app');
 ```
 
 3.  修改 App.vue
 
 ```typescript
- <template>
-   <RouterView/>
- </template>
+<template>
+       <RouterView /> 
+</template>
 ```
 
 # 5. 集成 `vueuse`
+
 `VueUse` 是一个基于 `Composition API` 的实用函数集合。
 
 ## 安装
@@ -484,6 +495,7 @@ module.exports = {
      });
  </script>
 ```
+
 useMouse 只是 vueuse 的一个最基本的函数库，还有许多，总会有一个适合你；
 
 更多函数官方文档：[链接](https://vueuse.org/)
@@ -559,36 +571,35 @@ useMouse 只是 vueuse 的一个最基本的函数库，还有许多，总会有
 1.  新建 src/utils/axios.ts
 
 ```typescript
- import axios, { AxiosResponse, AxiosRequestConfig } from 'axios';
+import axios, { AxiosResponse, AxiosRequestConfig } from 'axios';
 
- const service = axios.create();
+const service = axios.create(); // Request interceptors
 
- // Request interceptors
- service.interceptors.request.use(
-     (config: AxiosRequestConfig) => {
-         // do something
-         return config;
-     },
-     (error: any) => {
-         Promise.reject(error);
-     }
- );
+service.interceptors.request.use(
+    (config: AxiosRequestConfig) => {
+        // do something
+        return config;
+    },
+    (error: any) => {
+        Promise.reject(error);
+    }
+); // Response interceptors
 
- // Response interceptors
- service.interceptors.response.use(
-     async (response: AxiosResponse) => {
-         // do something
-     },
-     (error: any) => {
-         // do something
-         return Promise.reject(error);
-     }
- );
+service.interceptors.response.use(
+    async (response: AxiosResponse) => {
+        // do something
+    },
+    (error: any) => {
+        // do something
+        return Promise.reject(error);
+    }
+);
 
- export default service;
+export default service;
 ```
 
 2.  在页面中使用即可
+
 ```typescript
 <script lang="ts">
     import request from '@/utils/axios';
@@ -603,23 +614,25 @@ useMouse 只是 vueuse 的一个最基本的函数库，还有许多，总会有
 ```
 
 ## 封装请求参数和响应数据的所有 api (可选项)
+
 1. 新建 `src/api/index.ts`
+
 ```typescript
 import * as login from './module/login';
 import * as index from './module/index';
 
 export default Object.assign({}, login, index);
-
 ```
 
 2. 新建 `src/api/module/login.ts` 和 `src/api/module/index.ts`
+
 ```typescript
 import request from '@/utils/axios';
 
 /**
  * 登录
  */
- 
+
 interface IResponseType<P = {}> {
     code?: number;
     status: number;
@@ -641,7 +654,9 @@ export const login = (username: string, password: string) => {
     });
 };
 ```
-3. 由于使用了 typescript，所以需新增 `src/types/shims-axios.d.ts` 
+
+3. 由于使用了 typescript，所以需新增 `src/types/shims-axios.d.ts`
+
 ```typescript
 import { AxiosRequestConfig } from 'axios';
 /**
@@ -660,13 +675,14 @@ declare module 'axios' {
         patch<T = any>(url: string, data?: any, config?: AxiosRequestConfig): Promise<T>;
     }
 }
-
 ```
-4. 在 `src/pages/request.vue` 页面中使用
+
+4. 在 `src/views/request.vue` 页面中使用
+
 ```typescript
 <script lang="ts">
     import API from '@/api';
-    
+
     const requestRes = async () => {
         let result = await API.login('zhangsan', '123456');
     }
@@ -674,16 +690,21 @@ declare module 'axios' {
 </script>
 
 ```
+
 # 8. css 的 UI 样式库
 
 > 可选很多，根据自己项目的需求去进行选择即可
 
 **注意：UI 库一般需要按需引入（下面以 `element-plus` 为例）**
+
 1. 安装 `vite-plugin-style-import`
+
 ```bash
 pnpm i vite-plugin-style-import --save-dev
 ```
+
 2. 修改 `vite.config.ts`
+
 ```typescript
 ...
 import styleImport from 'vite-plugin-style-import'
@@ -712,14 +733,19 @@ export default defineConfig({
 ```
 
 # 9. 使用 [commitizen](https://github.com/commitizen/cz-cli) 规范git提交
+
 为了使团队多人协作更加的规范，所以需要每次在 git 提交的时候，做一次硬性规范提交，规范 git 的提交信息
 
 ## 安装 `commitizen` (交互式提交 + 自定义提示文案 + Commit规范)
+
 1. 安装
+
 ```bash
 pnpm install -D commitizen cz-conventional-changelog @commitlint/config-conventional @commitlint/cli commitlint-config-cz cz-customizable
 ```
+
 2. 配置 `package.json`
+
 ```json
 {
   ...
@@ -736,7 +762,9 @@ pnpm install -D commitizen cz-conventional-changelog @commitlint/config-conventi
   ...
 }
 ```
+
 3. 新增配置 `commitlint.config.js`
+
 ```javascript
 module.exports = {
     extends: ['@commitlint/config-conventional', 'cz'],
@@ -759,8 +787,8 @@ module.exports = {
                 'chore', // 构建过程或辅助工具的变动
                 'revert', // feat(pencil): add ‘graphiteWidth’ option (撤销之前的commit)
                 'merge', // 合并分支， 例如： merge（前端页面）： feature-xxxx修改线程地址
-                'build', // 打包
-            ],
+                'build' // 打包
+            ]
         ],
         // <type> 格式 小写
         'type-case': [2, 'always', 'lower-case'],
@@ -778,29 +806,30 @@ module.exports = {
         'subject-case': [0, 'never'],
         // <body> 以空行开头
         'body-leading-blank': [1, 'always'],
-        'header-max-length': [0, 'always', 72],
-    },
+        'header-max-length': [0, 'always', 72]
+    }
 };
-
 ```
+
 4. 自定义提示则添加 `.cz-config.js`
+
 ```javascript
 module.exports = {
     types: [
-        {value: 'feature',  name: 'feature:  增加新功能'},
-        {value: 'bug',      name: 'bug:      测试反馈bug列表中的bug号'},
-        {value: 'fix',      name: 'fix:      修复bug'},
-        {value: 'ui',       name: 'ui:       更新UI'},
-        {value: 'docs',     name: 'docs:     文档变更'},
-        {value: 'style',    name: 'style:    代码格式(不影响代码运行的变动)'},
-        {value: 'perf',     name: 'perf:     性能优化'},
-        {value: 'refactor', name: 'refactor: 重构(既不是增加feature，也不是修复bug)'},
-	{value: 'release',  name: 'release:  发布'},
-	{value: 'deploy',   name: 'deploy:   部署'},
-        {value: 'test',     name: 'test:     增加测试'},
-        {value: 'chore',    name: 'chore:    构建过程或辅助工具的变动(更改配置文件)'},
-        {value: 'revert',   name: 'revert:   回退'},
-    	{value: 'build',    name: 'build:    打包'}
+        { value: 'feature', name: 'feature:  增加新功能' },
+        { value: 'bug', name: 'bug:      测试反馈bug列表中的bug号' },
+        { value: 'fix', name: 'fix:      修复bug' },
+        { value: 'ui', name: 'ui:       更新UI' },
+        { value: 'docs', name: 'docs:     文档变更' },
+        { value: 'style', name: 'style:    代码格式(不影响代码运行的变动)' },
+        { value: 'perf', name: 'perf:     性能优化' },
+        { value: 'refactor', name: 'refactor: 重构(既不是增加feature，也不是修复bug)' },
+        { value: 'release', name: 'release:  发布' },
+        { value: 'deploy', name: 'deploy:   部署' },
+        { value: 'test', name: 'test:     增加测试' },
+        { value: 'chore', name: 'chore:    构建过程或辅助工具的变动(更改配置文件)' },
+        { value: 'revert', name: 'revert:   回退' },
+        { value: 'build', name: 'build:    打包' }
     ],
     // override the messages, defaults are as follows
     messages: {
@@ -816,6 +845,7 @@ module.exports = {
     subjectLimit: 72
 };
 ```
+
 5. 交互界面测试
 
 ![carbon.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d2be96b13d3c427e919b11e5bc5404e4~tplv-k3u1fbpfcp-watermark.image?)
@@ -824,7 +854,9 @@ module.exports = {
 -   那么现在我们的 husky 就闪亮登场了
 
 ## 安装 husky
+
 1. 安装
+
 ```bash
 # 1.安装
 pnpm i husky lint-staged -D
@@ -840,7 +872,9 @@ npx husky add .husky/commit-msg 'npx --no-install commitlint --edit "$1"'
 
 # 5. 使用 `git commit -m "message"` 就会看到 hook 生效了。
 ```
+
 2. 添加配置 `package.json`
+
 ```json
 {
   ...
@@ -855,8 +889,50 @@ npx husky add .husky/commit-msg 'npx --no-install commitlint --edit "$1"'
 ```
 
 ## 提交日志（可选）
+
 -   [standard-version](https://github.com/conventional-changelog/standard-version) 或者 [conventional-changelog](https://github.com/conventional-changelog/conventional-changelog)
 
+1. **建议包管理器使用优先级：pnpm > yarn > npm > cnpm**
 
+| 工具 | 安装依赖包（-s ，-D，-g 根据情况使用） | 初始化（不加y逐项初始化配置） | 卸载依赖包（-g全局卸载） |
+| --- | --- | --- | --- |
+| npm | npm install xxx -s(生产依赖) -D(开发依赖) -g(全局) | npm init -y(全部yes) | npm uninstall xxx -g(全局) |
+| cnpm | cpm install xxx -s(生产依赖) -D(开发依赖) -g(全局) | cnpm init -y(全部yes) | cnpm uninstall xxx -g(全局) |
+| npx | npx xxx -g(全局) | 无 | 无 |
+| yarn | yarn add xxx -s(生产依赖) -D(开发依赖) -g(全局) | yarn init -y(全部yes) | yarn remove xxx -g(全局) |
+| pnpm | pnpm add xxx -s(生产依赖) -D(开发依赖) -g(全局) | pnpm init -y(全部yes) | pnpm remove xxx -g(全局) |
 
+2. **npm常用命令**
 
+| 查询当前配置的镜像 | 设置成淘宝镜像 |
+| --- | --- |
+| npm get registry | yarn config get registry |
+| npm config set registry https://registry.npm.taobao.org | yarn config set registry https://registry.npm.taobao.org |
+
+```bash
+npm config set registry https://registry.npm.taobao.org
+yarn config set registry https://registry.npm.taobao.org
+```
+
+3. **pnpm &yarn & npm & cnpm包管理工具之间的区别**
+
+| 包管理工具 | 优点 | 缺点 | 可以替代的方案 | 注意事项 |
+| --- | --- | --- | --- | --- |
+| npm | - 具有丰富的模块生态系统 <br/> - 社区活跃，更新迭代快 <br/> - 官方的默认工具，使用广泛 | - 安装依赖速度慢 <br/>- 会有多个版本的包存在 | yarn、pnpm | 由于npm在安装依赖过程中可能会出现网络问题，因此注意备份和恢复本地缓存 |
+| cnpm | - 由于镜像源国内化，因此安装速度较快 | - 镜像源不稳定，容易出现问题 <br/>- 存在部分包安装失败的情况 | taobao-npm、yarn | 由于cnpm可能存在不稳定性问题，建议在尝试使用之前先备份好本地缓存 |
+| yarn | - 稳定性高，下载速度快 <br/>- 版本锁定，安装版本统<br/> - 可以并行下载多个包 <br/> -缓存机制，如果之前已经安装过一个软件包，用Yarn再次安装时之间从缓存中获取，就不用像npm那样再从网络下载了 | - 模块生态相比npm较弱 | npm、pnpm | yarn需要配置registry以确保从正确的镜像源下载包 |
+| pnpm | - 安装速度快，同时占用空间少 <br/>-pnpm继承了yarn的所有优点，包括离线模式和确定性安装<br/>- 可以与npm完全兼容 | - 相对较新，缺乏历史纪录 <br/>- 存在兼容性问题 | npm、yarn | pnpm需要在使用之前进行正确的配置和安装，避免出现奇怪的兼容性问题 |
+
+**版本号问题**
+
+-   1.2.3 1 代表的就是主版本（主版本的升级一般是重大的变更，相互之间的依赖都会不小的影响，比如: webpackV5 不少构建工具版本不同步会出现进程失败的问题） 2 代表的就是次版本（一般是些新功能不怎么影响，无感知的）3 代表的补丁版本(bug)
+
+-   ~1.2.3: "~"代表只更新补丁版本，比如当前：~1.2.0 再次更新 如果有最新的 1.2.3 就会更新到 1.2.3版本 1.3.0则不会自动更新
+
+-   ^1.2.3: "^"代表更新此版本和补丁版本，比如当前：^1.2.0 再次更新 如果有最新的1.3.2 就会更新到 1.3.2版本 2.0.0则不会自动更新
+
+-   1.2.3：什么都不写就是锁定版本，指定只是用当前版本不会自动更新最新版本。
+
+> package.json 和 package-lock.json **_package-lock.json_**:当前node_modules中的版本就是按照lock.json中的锁定版本进行安装的依赖。
+
+npm 旧版本之前是不会生成package-lock.json的，这是之前和yarn区别比较大的地方，因为yarn是有yarn-lock的。(后续npm推出lock后其实和yarn的区别并不是很大了，唯一的区别就是快慢的问题 Yarn是并行安装依赖的 Npm是串行安装)

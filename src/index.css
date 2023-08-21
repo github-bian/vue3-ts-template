@@ -1,0 +1,7 @@
+/* ./src/index.css */
+@tailwind base;
+@tailwind components;
+.btn{
+    @apply text-white py-2 px-4 rounded bg-blue-600 font-semibold;
+}
+@tailwind utilities;
