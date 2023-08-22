@@ -20,11 +20,8 @@
 	},
 	"config": {
 		"commitizen": {
-			"path": "./node_modules/cz-customizable"
-		},
-		"cz-customizable": {
-			"config": ".cz-config.cjs"
-		}
+			"path": "node_modules/cz-git"
+		  }
 	},
 	"lint-staged": {
 		"*.{js,ts}": [
