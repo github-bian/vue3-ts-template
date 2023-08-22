@@ -4,6 +4,7 @@
 # 1. 初始化项目
 
 ## 按步骤提示初始化：
+> 强制使用pnpm包管理器工具,团队开发项目的时候，需要统一包管理器工具,因为不同包管理器工具下载同一个依赖,可能版本不一样,导致项目出现bug问题,因此包管理器工具需要统一管理
 
 1.  使用 `deppon-front-cli` 命令
 
@@ -43,7 +44,7 @@ cd [项目名称] && pnpm install && pnpm run dev
 | 环境                 | 名称版本                                                     | 备注                                                         |
 | -------------------- | :----------------------------------------------------------- | ------------------------------------------------------------ |
 | **开发工具**         | VSCode                                                       | [下载地址](https://code.visualstudio.com/Download)           |
-| **运行环境**         | Node 14+                                                     | [下载地址](http://nodejs.cn/download)                        |
+| **运行环境**         | Node 16.16.0     <br/>     pnpm 6.22.2                               | [下载地址](http://nodejs.cn/download)                        |
 | **VSCode插件(必装)** | 1. `Vue Language Features (Volar) ` <br/> 2. `TypeScript Vue Plugin (Volar) `  <br/>3. 禁用 Vetur | ![vscode-plugin](https://foruda.gitee.com/images/1687755823108948048/d0198b2d_716974.png) |
 
 # 2. 代码质量风格的统一
