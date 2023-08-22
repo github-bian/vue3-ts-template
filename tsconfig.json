@@ -1,9 +1,5 @@
 {
     "compilerOptions": {
-        "typeRoots": [
-            "node_modules/@types", // 默认值
-            "src/types"
-        ],
         "target": "esnext",
         "useDefineForClassFields": true,
         "module": "esnext",
@@ -17,21 +13,29 @@
             "esnext",
             "dom"
         ],
-        "baseUrl": "./",
+        "baseUrl": ".",
+        "allowJs": true,
         "paths": {
-            "@": [
-                "src"
-            ],
             "@/*": [
                 "src/*"
             ]
-        }
+        },
+        "types": [
+            "vite/client",
+        ],
+        "skipLibCheck": true /* Skip type checking all .d.ts files. */,
+        "allowSyntheticDefaultImports": true /* 允许默认导入 */,
+        "forceConsistentCasingInFileNames": true /* Ensure that casing is correct in imports. */
     },
     "include": [
         "src/**/*.ts",
-        "src/**/*.d.ts",
-        "src/**/*.tsx",
-        "src/**/*.vue"
+        "src/**/*.vue",
+        "src/types/**/*.d.ts"
+    ],
+    "exclude": [
+        "node_modules",
+        "dist",
+        "**/*.js"
     ],
     "references": [
         {

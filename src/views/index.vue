@@ -14,11 +14,7 @@ import UsePinia from '@/components/UsePinia.vue';
 		<UsePinia />
 		<div class="group flex justify-center p-20 space-x-3 text-2xl text-black-500 cursor-pointer">
 			<router-link class="group-hover:text-blue-400" to="/login">login</router-link>
-
-			<br /><br />
 			<router-link class="group-hover:text-green-400" to="/vueUse">vueUse</router-link>
-			<br /><br />
-			<router-link class="group-hover:text-red-400" to="/request">request</router-link>
 		</div>
 	</div>
 </template>

@@ -1,23 +1,22 @@
 {
-	"name": "vite-vue3-ts-pinia",
+	"name": "vite-vue3-ts",
 	"private": true,
 	"version": "0.0.1",
 	"scripts": {
 		"dev": "vite",
 		"build": "vue-tsc --noEmit && vite build",
+		"build:prod": "vite build --mode production &&vue-tsc --noEmit",
 		"build-tailwind": "tailwind build ./src/index.css -o ./public/index.css",
 		"preview": "vite preview",
-        "preinstall": "npx only-allow pnpm",
-        "lint:lint-staged": "lint-staged",
-		"eslint:comment": "使用 ESLint 检查并自动修复 src 目录下所有扩展名为 .js 和 .vue 的文件",
-		"eslint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
-		"prettier:comment": "自动格式化当前目录下的所有文件",
-		"prettier": "prettier .  --write",
-		"commit:comment": "引导设置规范化的提交信息",
+		"prepare": "husky install",
+		"preinstall": "npx only-allow pnpm",
+		"lint:eslint": "eslint  --fix --ext .ts,.js,.vue ./src ",
+		"lint:prettier": "prettier --write \"**/*.{js,cjs,ts,json,tsx,css,less,scss,vue,html,md}\"",
+		"lint:stylelint": "stylelint  \"**/*.{css,scss,vue}\" --fix",
+		"lint:lint-staged": "lint-staged",
 		"commit": "git add . && git-cz",
 		"check-version": "babel-node check-version.mjs",
-		"postinstall": "npm run check-version",
-		"prepare": "husky install"
+		"postinstall": "npm run check-version"
 	},
 	"config": {
 		"commitizen": {
@@ -29,63 +28,79 @@
 	},
 	"lint-staged": {
 		"*.{js,ts}": [
-		  "eslint --fix",
-		  "prettier --write"
+			"eslint --fix",
+			"prettier --write"
 		],
 		"*.{cjs,json}": [
-		  "prettier --write"
+			"prettier --write"
 		],
 		"*.{vue,html}": [
-		  "eslint --fix",
-		  "prettier --write",
-		  "stylelint --fix"
+			"eslint --fix",
+			"prettier --write",
+			"stylelint --fix"
 		],
 		"*.{scss,css}": [
-		  "stylelint --fix",
-		  "prettier --write"
+			"stylelint --fix",
+			"prettier --write"
 		],
 		"*.md": [
-		  "prettier --write"
+			"prettier --write"
 		]
-	  },
+	},
 	"dependencies": {
 		"@babel/node": "^7.22.10",
+		"@vitejs/plugin-vue": "^4.2.3",
 		"@vueuse/core": "^8.2.0",
-		"axios": "^0.26.1",
-		"pinia": "^2.0.12",
+		"axios": "^1.4.0",
+		"nprogress": "^0.2.0",
+		"path-browserify": "^1.0.1",
+		"path-to-regexp": "^6.2.0",
+		"pinia": "^2.0.33",
 		"semver": "^7.5.4",
-		"vue": "^3.3.4",
+		"vue": "^3.3.1",
 		"vue-router": "^4.2.0"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.22.10",
 		"@babel/eslint-parser": "^7.22.10",
-		"@commitlint/cli": "^16.2.3",
-		"@commitlint/config-conventional": "^16.2.4",
+		"@commitlint/cli": "^17.6.3",
+		"@commitlint/config-conventional": "^17.6.3",
 		"@types/node": "^17.0.23",
-		"@typescript-eslint/eslint-plugin": "^5.16.0",
-		"@typescript-eslint/parser": "^5.16.0",
-		"@vitejs/plugin-vue": "^2.2.0",
+		"@types/nprogress": "^0.2.0",
+		"@types/path-browserify": "^1.0.0",
+		"@typescript-eslint/eslint-plugin": "^5.59.6",
+		"@typescript-eslint/parser": "^5.59.6",
 		"autoprefixer": "^10.4.15",
 		"commitizen": "^4.3.0",
 		"commitlint-config-cz": "^0.13.3",
 		"cz-conventional-changelog": "^3.3.0",
 		"cz-customizable": "^6.9.2",
-		"eslint": "^8.47.0",
-		"eslint-config-prettier": "^8.5.0",
-		"eslint-plugin-prettier": "^4.0.0",
-		"eslint-plugin-simple-import-sort": "^10.0.0",
-		"eslint-plugin-vue": "^8.5.0",
-		"husky": "^8.0.0",
-		"lint-staged": "^12.5.0",
+		"cz-git": "^1.6.1",
+		"eslint": "^8.40.0",
+		"eslint-config-prettier": "^8.8.0",
+		"eslint-plugin-prettier": "^4.2.1",
+		"eslint-plugin-vue": "^9.13.0",
+		"husky": "^8.0.3",
+		"lint-staged": "^13.2.2",
 		"postcss": "^8.4.28",
+		"postcss-html": "^1.5.0",
+		"postcss-scss": "^4.0.6",
 		"prettier": "^2.8.8",
-		"sass": "^1.66.0",
+		"sass": "^1.58.3",
+		"stylelint": "^15.5.0",
+		"stylelint-config-html": "^1.1.0",
+		"stylelint-config-recess-order": "^4.0.0",
+		"stylelint-config-recommended-scss": "11.0.0 ",
+		"stylelint-config-recommended-vue": "^1.4.0",
+		"stylelint-config-standard": "^33.0.0",
+		"stylelint-config-standard-scss": "^9.0.0",
 		"tailwindcss": "^3.3.3",
-		"typescript": "^4.5.4",
-		"vite": "^2.8.0",
+		"terser": "^5.19.2",
+		"typescript": "^5.0.4",
+		"unplugin-auto-import": "^0.15.3",
+		"vite": "^4.3.5",
 		"vite-plugin-eslint": "^1.8.1",
-		"vue-tsc": "^0.29.8"
+		"vue-tsc": "^1.6.5 "
 	},
 	"engines": {
 		"node": ">=14.0.0 <17.0.0"

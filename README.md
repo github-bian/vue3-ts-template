@@ -18,66 +18,36 @@
 
 ## 按步骤提示初始化：
 
-1.  使用 vite-cli 命令
+1.  使用 `deppon-front-cli` 命令
 
 ```bash
-# pnpm
-pnpm create vite
+#切换npm源为华为云
+pnpm config set registry https://repo.huaweicloud.com/repository/npm/
 
-# npm
-npm init vite@latest
+#安装脚手架工具
+pnpm install deppon-front-cli
 
-# yarn
-yarn create vite
-```
+#创建项目
+deppon-front-cli create [项目名称]
 
-2.  输入项目名：
-
-```bash
-? Project name:  vite-vue3-ts-pinia
-```
-
-3.  选择一个框架（vue）
-
-```bash
-? Select a framework: » - Use arrow-keys. Return to submit.
-     vanilla // 原生js
+#选择需要的框架
  >   vue     // 默认就是 vue3
      react   // react
-     preact  // 轻量化react框架
-     lit     // 轻量级web组件
-     svelte  // svelte框架
+
+#进入创建项目的根目录执行命令
+cd [项目名称] && pnpm install && pnpm run dev
 ```
 
-4.  使用 typescript
 
-```
-? Select a variant: › - Use arrow-keys. Return to submit.
-     vue
- ❯   vue-ts
-```
+## 环境准备
 
-5.  启动项目
+| 环境                 | 名称版本                                                     | 备注                                                         |
+| -------------------- | :----------------------------------------------------------- | ------------------------------------------------------------ |
+| **开发工具**         | VSCode                                                       | [下载地址](https://code.visualstudio.com/Download)           |
+| **运行环境**         | Node 14+                                                     | [下载地址](http://nodejs.cn/download)                        |
+| **VSCode插件(必装)** | 1. `Vue Language Features (Volar) ` <br/> 2. `TypeScript Vue Plugin (Volar) `  <br/>3. 禁用 Vetur | ![vscode-plugin](https://foruda.gitee.com/images/1687755823108948048/d0198b2d_716974.png) |
 
-```bash
-cd vite-vue3-ts-pinia && pnpm install && pnpm run dev
-```
 
-## 快速初始化（建议使用）：
-
-```
-# pnpm
-pnpm create vite project-name -- --template vue-ts
-
-# npm 6.x
-npm init vite@latest project-name --template vue-ts
- 
-# npm 7+, 需要额外的双横线：
-npm init vite@latest project-name -- --template vue-ts
- 
-# yarn
-yarn create vite project-name --template vue-ts
-```
 
 ## 集成配置
 
