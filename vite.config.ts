@@ -3,6 +3,7 @@ import * as path from 'path';
 import AutoImport from 'unplugin-auto-import/vite';
 import { UserConfig, ConfigEnv, loadEnv, defineConfig } from 'vite';
 import eslintPlugin from 'vite-plugin-eslint';
+import { viteMockServe } from 'vite-plugin-mock';
 const pathSrc = path.resolve(__dirname, 'src');
 
 export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
@@ -55,6 +56,10 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
 		},
 		plugins: [
 			vue(),
+			viteMockServe({
+				logger: false,
+				mockPath: './src/mock/',
+			}),
 			eslintPlugin({
 				include: ['src/**/*.ts', 'src/**/*.vue', 'src/*.ts', 'src/*.vue'],
 			}),
@@ -84,7 +89,7 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
 			proxy: {
 				// 反向代理解决跨域
 				[env.VITE_APP_BASE_API]: {
-					target: 'your https address', //接口地址
+					target: 'http://localhost:3000', //接口地址
 					changeOrigin: true,
 					rewrite: (path: string) => path.replace(new RegExp('^' + env.VITE_APP_BASE_API), ''), // 替换 /dev-api 为 target 接口地址
 				},

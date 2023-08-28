@@ -20,7 +20,7 @@
 	"config": {
 		"commitizen": {
 			"path": "node_modules/cz-git"
-		  }
+		}
 	},
 	"lint-staged": {
 		"*.{js,ts}": [
@@ -78,6 +78,7 @@
 		"eslint-plugin-vue": "^9.13.0",
 		"husky": "^8.0.3",
 		"lint-staged": "^13.2.2",
+		"mockjs": "^1.1.0",
 		"postcss": "^8.4.28",
 		"postcss-html": "^1.5.0",
 		"postcss-scss": "^4.0.6",
@@ -96,6 +97,7 @@
 		"unplugin-auto-import": "^0.15.3",
 		"vite": "^4.3.5",
 		"vite-plugin-eslint": "^1.8.1",
+		"vite-plugin-mock": "^3.0.0",
 		"vue-tsc": "^1.6.5 "
 	},
 	"engines": {

@@ -6,6 +6,8 @@
 ## 按步骤提示初始化：
 > 强制使用pnpm包管理器工具,团队开发项目的时候，需要统一包管理器工具,因为不同包管理器工具下载同一个依赖,可能版本不一样,导致项目出现bug问题,因此包管理器工具需要统一管理
 
+
+
 1.  使用 `deppon-front-cli` 命令
 
 ```bash
@@ -234,8 +236,6 @@ module.exports = {
 }
 ```
 
-
-
 # 3. 规范git提交
 >为了使团队多人协作更加的规范，所以需要每次在 git 提交的时候，做一次硬性规范提交，规范 git 的提交信息
 ### 核心内容是配置 Husky 的 pre-commit 和 commit-msg 两个钩子:
@@ -252,4 +252,20 @@ module.exports = {
 
 
 
+### <font color='red'>注意！</font>
+前端项目在开发中，需要安装依赖，而安装依赖有多种方式，比如：npm、yarn和pnpm; 当团队中有多人协同开发时，务必是要使用同一个包管理器的，一般的做法是在md文档中约束, 但是总会有小伙伴不看文档，或者一时疏忽使用了另外的包管理器，比如说项目中使用的是pnpm，而一个人却使用了yarn安装了依赖，并且上传了代码，这样就很有可能因为包版本的问题导致项目有bug,今天我们就用`npx only-allow pnpm`进行强制约束，解决这个问题。
 
+```javascript
+	"scripts": {
+		"preinstall": "npx only-allow pnpm && npm run check-version",
+	},
+```
+
+- `preinstall`是包安装工具的 钩子函数，在上例中作为 `install 之前`的拦截判断
+- `postinstall`是包安装工具的 钩子函数, `install 之后触发`的拦截判断
+
+
+### [<font color=green>为什么用pnpm？</font>](https://juejin.cn/post/6932046455733485575?searchId=20230828155729E930C033F2C31DA87318) 
+- `npm2 `是通过嵌套的方式管理 node_modules 的，会有同样的依赖复制多次的问题。
+- `npm3+ `和 `yarn `是通过铺平的扁平化的方式来管理 node_modules，解决了嵌套方式的部分问题，但是引入了幽灵依赖的问题，并且同名的包只会提升一个版本的，其余的版本依然会复制多次。
+- `pnpm` 则是用了另一种方式，不再是复制了，而是都从全局 store 硬连接到 node_modules/.pnpm，然后之间通过软链接来组织依赖关系。这样不但节省磁盘空间，也没有幽灵依赖问题，安装速度还快，从机制上来说完胜 npm 和 yarn
