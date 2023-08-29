@@ -6,7 +6,7 @@
 		"dev": "vite",
 		"build": "vue-tsc --noEmit && vite build",
 		"build:prod": "vite build --mode production &&vue-tsc --noEmit",
-	       	"build-tailwind": "tailwind build ./src/index.css -o ./public/index.css",
+		"build-tailwind": "tailwind build ./src/index.css -o ./public/index.css",
 		"preview": "vite preview",
 		"prepare": "husky install",
 		"preinstall": "npx only-allow pnpm && npm run check-version",
@@ -19,9 +19,6 @@
 	},
 	"config": {
 		"commitizen": {
-
-
-
 			"path": "node_modules/cz-git"
 		}
 	},
@@ -54,9 +51,6 @@
 		"nprogress": "^0.2.0",
 		"path-browserify": "^1.0.1",
 		"path-to-regexp": "^6.2.0",
-
-
-		
 		"pinia": "^2.0.33",
 		"semver": "^7.5.4",
 		"vue": "^3.3.1",
