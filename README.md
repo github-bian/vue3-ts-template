@@ -15,7 +15,7 @@
 pnpm config set registry https://repo.huaweicloud.com/repository/npm/
 
 # 2. 安装脚手架工具
-pnpm install deppon-front-cli
+pnpm install bian-cli
 
 # 3. 创建项目
 deppon-front-cli create [项目名称]
