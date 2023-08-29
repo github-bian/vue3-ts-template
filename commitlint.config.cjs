@@ -54,7 +54,7 @@ module.exports = {
 	  ],
 		useEmoji: false, //是否在提交规则中添加emoji表情
 		emojiAlign: 'center', //emoji表情位置
-		useAI: false,
+		useAI: false, //是否启用AI辅助
 		aiNumber: 1,
 		themeColorCode: '',
 		scopes: [],
