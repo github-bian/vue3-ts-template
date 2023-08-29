@@ -238,6 +238,8 @@ module.exports = {
 
 # 3. 规范git提交
 >为了使团队多人协作更加的规范，所以需要每次在 git 提交的时候，做一次硬性规范提交，规范 git 的提交信息
+
+执行 `pnpm run commit` 唤起 git commit 交互，根据提示完成信息的输入和选择。
 ### 核心内容是配置 Husky 的 pre-commit 和 commit-msg 两个钩子:
    1. `pre-commit`：`Husky`+ `Lint-staged` 整合实现 Git 提交前代码规范检测/格式化 (前提：ESlint + Prettier + Stylelint 代码统一规范)；
    2. `commit-msg`: `Husky` + `Commitlint` + `Commitizen` + `cz-git` 整合实现生成规范化且高度自定义的 Git commit message
