@@ -19,7 +19,7 @@ const service = axios.create({
 
 // 请求拦截器
 service.interceptors.request.use(
-	(config: InternalInternalAxiosRequestConfig) => {
+	(config: InternalAxiosRequestConfig) => {
 		// console.log("请求拦截器", config)
 		// 1.请求的调整 2.配置用户标识
 		config = handleRequestHeader(config);
